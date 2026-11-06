@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Market Volatility Predictor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>📈 Stock Market Volatility Predictor</h1>
+    <p>Predict tomorrow's closing price and the upcoming volatility from Yahoo Finance history.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <form id="predict-form">
+        <input id="ticker" type="text" placeholder="Ticker symbol, e.g. AAPL" maxlength="12" autocomplete="off" required>
+        <button id="go" type="submit">Predict</button>
+      </form>
+      <div class="chips" id="chips">
+        <span>AAPL</span><span>MSFT</span><span>TSLA</span><span>NVDA</span><span>GOOGL</span><span>AMZN</span>
+      </div>
+      <p id="status" class="status" hidden></p>
+    </section>
+
+    <section id="result" class="hidden">
+      <div class="grid">
+        <div class="card stat"><small>Last close</small><strong id="r-last">-</strong><em id="r-date"></em></div>
+        <div class="card stat"><small>Predicted next close</small><strong id="r-pred">-</strong><em id="r-change"></em></div>
+        <div class="card stat"><small>Expected daily volatility</small><strong id="r-vol">-</strong><em id="r-annual"></em></div>
+        <div class="card stat"><small>Volatility level</small><strong id="r-level">-</strong><em id="r-saved"></em></div>
+      </div>
+
+      <div class="card"><h3>Price &amp; 20-day rolling average</h3><canvas id="priceChart" height="110"></canvas></div>
+      <div class="card"><h3>20-day rolling volatility (annualized)</h3><canvas id="volChart" height="90"></canvas></div>
+    </section>
+
+    <section class="card">
+      <div class="row"><h3>Recent predictions</h3><button id="refresh" class="ghost">Refresh</button></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Time</th><th>Ticker</th><th>Last close</th><th>Predicted</th><th>Change</th><th>Volatility</th></tr></thead>
+          <tbody id="history"><tr><td colspan="6">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="disclaimer">Educational project only - not financial advice. Short-term prices are very hard to predict; volatility is the more reliable output.</p>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
